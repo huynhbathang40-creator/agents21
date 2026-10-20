@@ -1,0 +1,39 @@
+{
+  "_source": "DOCUMENTATION EXAMPLE (not a live response): https://docs.scrapecreators.com/v2/instagram/reels/search, read via Firecrawl 2026-10-20. Item 1 trimmed from the doc example (caption and URLs shortened; owner fields per doc). The doc response has no cursor and no view count; pagination uses the `page` query param. Item 2 is synthetic (caption object, numeric unix taken_at). Item 3 is synthetic garbage.",
+  "success": true,
+  "credits_remaining": 99,
+  "credits_charged": 1,
+  "reels": [
+    {
+      "id": "3723045213787686915",
+      "shortcode": "DOq6eV6iIgD",
+      "url": "https://www.instagram.com/reel/DOq6eV6iIgD/",
+      "caption": "Dogs are family 💙\n\nI met Rocco, a little rescue Chihuahua all the way from Mexico 🇲🇽🐾\n\n#dogphotography #rescuedog #chihuahua #dogportrait #dogphotographer",
+      "taken_at": "2025-09-16T16:56:45.000Z",
+      "thumbnail_src": "https://scontent-sjc3-1.cdninstagram.com/v/t51.2885-15/550186015_17890754136343371_4563383710172988045_n.jpg",
+      "display_url": "https://scontent-sjc3-1.cdninstagram.com/v/t51.2885-15/550186015_display.jpg",
+      "video_duration": 75.7,
+      "like_count": 3487,
+      "comment_count": 90,
+      "owner": {
+        "username": "fetchmycamera_",
+        "full_name": "Mark | Dog Photographer & Storyteller",
+        "profile_pic_url": "https://scontent-sjc3-1.cdninstagram.com/v/t51.2885-19/464124732_886472936919742_2388131534569981752_n.jpg"
+      },
+      "clips_music_attribution_info": {
+        "artist_name": "Oliver Max",
+        "song_name": "Smiling Heart",
+        "uses_original_audio": false,
+        "audio_id": "1711608879787237"
+      }
+    },
+    {
+      "id": "3723045213787686999",
+      "shortcode": "SYNTHKW02",
+      "caption": { "text": "Synthetic caption object #synthetic" },
+      "taken_at": 1758041805,
+      "thumbnail_src": "javascript:alert(1)"
+    },
+    "garbage"
+  ]
+}

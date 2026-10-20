@@ -1,0 +1,47 @@
+{
+  "_source": "DOCUMENTATION EXAMPLE (not a live response): https://docs.scrapecreators.com/v1/instagram/search/hashtag, read via Firecrawl 2026-10-20. Item 1 trimmed from the doc example (URLs shortened, comments array removed). Item 2 is synthetic with no url and no shortcode (must be skipped).",
+  "success": true,
+  "credits_remaining": 99,
+  "credits_charged": 1,
+  "hashtag": "funnydogs",
+  "media_type": "all",
+  "posts": [
+    {
+      "id": "3714950709444987377",
+      "__typename": "XDTGraphVideo",
+      "shortcode": "DOOJ_zSjcnx",
+      "url": "https://www.instagram.com/reel/DOOJ_zSjcnx/",
+      "caption": "Well we tried to be subtle…  #funnydogs #funny #whiteboxer #australianshepherd",
+      "thumbnail_src": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/542212527_18130644664455761_8262846918103190683_n.jpg",
+      "display_url": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/542212527_display.jpg",
+      "video_url": "https://scontent-ord5-2.cdninstagram.com/o1/v/t2/f2/m86/example.mp4",
+      "has_audio": false,
+      "product_type": "clips",
+      "video_duration": 65.733,
+      "clips_music_attribution_info": {
+        "artist_name": "_layla_the_boxer",
+        "song_name": "Original audio",
+        "uses_original_audio": true,
+        "audio_id": "1303301604923923"
+      },
+      "is_video": true,
+      "owner": {
+        "id": "13582495760",
+        "username": "_layla_the_boxer",
+        "is_verified": true,
+        "profile_pic_url": "https://scontent-ord5-3.cdninstagram.com/v/t51.2885-19/420493539_1460561894498614_4791883467164866946_n.jpg",
+        "full_name": "Layla the Boxer",
+        "follower_count": 1369176
+      },
+      "taken_at": "2025-09-05T12:51:42.000Z",
+      "is_ad": false,
+      "like_count": 35854,
+      "comment_count": 1263
+    },
+    {
+      "id": "3714950709444987999",
+      "caption": "Synthetic: no url, no shortcode"
+    }
+  ],
+  "cursor": "2"
+}

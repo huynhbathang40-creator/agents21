@@ -1,0 +1,88 @@
+{
+  "_source": "DOCUMENTATION EXAMPLE (not a live response): https://docs.scrapecreators.com/v1/tiktok/get-trending-feed, read via Firecrawl 2026-10-20. Items 1-2 trimmed from the doc example (URLs shortened). The doc example item has NO author.unique_id (handle is taken from url). Item 2 video.duration / music / text_extra / unique_id are ASSUMED (standard aweme shape; present in the TikTok search doc examples). Item 3 is synthetic, used to test missing fields.",
+  "success": true,
+  "credits_remaining": 99,
+  "credits_charged": 1,
+  "aweme_list": [
+    {
+      "aweme_id": "7540000301621841183",
+      "desc": "#hudsonvalley #fallgetaway #farm #upstateny #resort ",
+      "create_time": 1755543133,
+      "region": "US",
+      "author": {
+        "nickname": "Bre 🤍",
+        "avatar_thumb": {
+          "url_list": [
+            "https://p19-pu-sign-useast8.tiktokcdn-us.com/tos-useast8-avt-0068-tx2/3bc038986117debaa55c18bae5685e18~tplv-tiktokx-cropcenter-q:100:100:q70.heic"
+          ]
+        }
+      },
+      "statistics": {
+        "aweme_id": "7540000301621841183",
+        "comment_count": 646,
+        "digg_count": 71423,
+        "play_count": 1443873,
+        "share_count": 8440
+      },
+      "video": {
+        "cover": {
+          "url_list": [
+            "https://p19-pu-sign-useast8.tiktokcdn-us.com/tos-useast8-i-photomode-tx2/3a1c4f9217414c3c95dd8d25c2dd8d13~tplv-photomode-image-cover:640:0:q70.webp"
+          ]
+        }
+      },
+      "url": "https://www.tiktok.com/@breannafriedman0/photo/7540000301621841183"
+    },
+    {
+      "aweme_id": "7540968798585670968",
+      "desc": "Thrilling 3D motorcycle chases in the city. Evade cops at top speed!",
+      "create_time": 1755768714,
+      "create_time_utc": "2025-08-21T09:31:54.000Z",
+      "region": "VN",
+      "author": {
+        "nickname": "lyngame.52",
+        "unique_id": "lyngame.52",
+        "region": "VN",
+        "language": "vi",
+        "sec_uid": "MS4wLjABAAAAQLDjklcDNJ4ylkeY_3oFIf5KtaEorKG1-n0ZwmRORZig3y30uvmayXicp8pAdUvt"
+      },
+      "statistics": {
+        "aweme_id": "7540968798585670968",
+        "comment_count": 27,
+        "digg_count": 6035,
+        "download_count": 72,
+        "play_count": 589406,
+        "share_count": 192,
+        "forward_count": 0,
+        "collect_count": 442,
+        "repost_count": 0
+      },
+      "video": {
+        "duration": 15000,
+        "cover": {
+          "url_list": [
+            "https://p16-sign-va.tiktokcdn.com/example-cover.jpeg"
+          ]
+        }
+      },
+      "music": {
+        "title": "original sound - lyngame.52",
+        "author": "lyngame.52"
+      },
+      "text_extra": [
+        {
+          "hashtag_name": "gaming",
+          "type": 1
+        }
+      ],
+      "is_ad": false,
+      "url": "https://www.tiktok.com/@lyngame.52/video/7540968798585670968"
+    },
+    {
+      "aweme_id": "7000000000000000003",
+      "statistics": {
+        "play_count": "1200"
+      }
+    }
+  ]
+}

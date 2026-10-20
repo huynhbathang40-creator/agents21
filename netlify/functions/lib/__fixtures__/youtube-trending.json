@@ -1,0 +1,61 @@
+{
+  "_source": "DOCUMENTATION EXAMPLE (not a live response): https://docs.scrapecreators.com/v1/youtube/shorts/trending, read via Firecrawl 2026-10-20. Items 1-2 trimmed from the doc example (descriptions and keywords shortened). Item 3 is synthetic, used to test missing fields. The doc example has no share count, no channel avatar and no cursor.",
+  "success": true,
+  "credits_remaining": 99,
+  "credits_charged": 1,
+  "shorts": [
+    {
+      "id": "ou0nl5ET0HA",
+      "thumbnail": "https://img.youtube.com/vi/ou0nl5ET0HA/maxresdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=ou0nl5ET0HA",
+      "title": "That hooper who says their just shoes",
+      "description": null,
+      "commentCountText": "168",
+      "commentCountInt": 168,
+      "likeCountText": "151957",
+      "likeCountInt": 151957,
+      "viewCountText": "13,798,774",
+      "viewCountInt": 13798774,
+      "publishDateText": "Aug 7, 2025",
+      "publishDate": "2025-08-07T13:00:22-07:00",
+      "channel": {
+        "id": "UC3iObCgKLKr9xquQw7fCang",
+        "url": "https://www.youtube.com/@dameuniverse",
+        "handle": "dameuniverse",
+        "title": "Dame Universe"
+      },
+      "chapters": [],
+      "keywords": ["Kobe", "Sneaker heads", "Kobe Bryant"],
+      "durationMs": 19000,
+      "durationFormatted": "00:00:19"
+    },
+    {
+      "id": "RHjn1eyPLgI",
+      "thumbnail": "https://img.youtube.com/vi/RHjn1eyPLgI/maxresdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=RHjn1eyPLgI",
+      "title": "Save of the Century 🫡 Real Hero 💪 #discipline#success #mindset#ego#shorts#fyp#edit#motivation",
+      "description": "Save of the Century 🫡 Real Hero 💪 #discipline#success #mindset#ego#shorts#fyp#edit#motivation\n\nThey won't appreciate you until you leave.",
+      "commentCountText": "1.5K",
+      "commentCountInt": 1500,
+      "likeCountInt": null,
+      "viewCountText": "9,550,557",
+      "viewCountInt": 9550557,
+      "publishDateText": "Jul 18, 2025",
+      "publishDate": "2025-07-18T09:42:58-07:00",
+      "channel": {
+        "id": "UCj7yUpOuWpLhiiPjf2w15zg",
+        "url": "https://www.youtube.com/@MYVISIONshorts",
+        "handle": "MYVISIONshorts",
+        "title": "MY VISION"
+      },
+      "chapters": [],
+      "keywords": ["motivation", "know your worth"],
+      "durationMs": 8000,
+      "durationFormatted": "00:00:08"
+    },
+    {
+      "id": "SYNTH000003",
+      "viewCountText": "1,234"
+    }
+  ]
+}

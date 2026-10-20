@@ -1,0 +1,38 @@
+{
+  "_source": "DOCUMENTATION EXAMPLE (not a live response): https://docs.scrapecreators.com/v1/tiktok/search/keyword, read via Firecrawl 2026-10-20. Item 1 field values from the doc example (URLs shortened). The `aweme_info` wrapper around each search_item_list entry is ASSUMED (TikTok search shape); the mapper accepts wrapped and unwrapped items. Item 2 is synthetic (unwrapped, string counts). Item 3 is synthetic with no id and must be skipped.",
+  "success": true,
+  "credits_remaining": 99,
+  "credits_charged": 1,
+  "cursor": 12,
+  "search_item_list": [
+    {
+      "aweme_info": {
+        "aweme_id": "7334621391758642478",
+        "desc": "The most insane Super Bowl ever ‼️‼️‼️‼️#superbowlhalftime #SuperBowl #traviskelce #traviskelce #kansascitychiefs ",
+        "create_time": 1707724682,
+        "share_url": "https://www.tiktok.com/@kansascitychiefsfan5/video/7334621391758642478?_r=1&source=h5_m",
+        "author": {
+          "unique_id": "kansascitychiefsfan5",
+          "nickname": "Peter Griffin, fan",
+          "avatar_thumb": { "url_list": ["https://p16-amd-va.tiktokcdn.com/tos-maliva-avt-0068/43e401b82d50177d5869e4b00ef2505d~tplv-tiktokx-cropcenter-q:100:100:q75.webp"] }
+        },
+        "statistics": { "play_count": 31677, "digg_count": 355, "comment_count": 5, "share_count": 22 },
+        "video": {
+          "duration": 83851,
+          "cover": { "url_list": ["https://p16-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ociku3REEDAf4IXJAlOgKxpcSBieHzyBcmY8K5~c5_500x800.jpeg"] }
+        },
+        "music": { "title": "Yeah! (feat. Lil Jon & Ludacris)", "author": "Usher" }
+      }
+    },
+    {
+      "aweme_id": "7000000000000000222",
+      "desc": "Synthetic unwrapped item",
+      "create_time": "1707724000",
+      "author": { "unique_id": "synthetic_user" },
+      "statistics": { "play_count": "1,500", "digg_count": "abc" }
+    },
+    {
+      "aweme_info": { "desc": "no id here" }
+    }
+  ]
+}
