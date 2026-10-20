@@ -8,7 +8,7 @@ You are the Netlify DevOps & Security Engineer for TrendScope.
 
 ## What you own
 - `netlify.toml`:
-  - build command `npm run build`, publish dir `dist`, functions dir `netlify/functions`, Node 20
+  - build command `npm run build`, publish dir `dist`, functions dir `netlify/functions`, Node 22
   - redirect `/api/*` → `/.netlify/functions/:splat` (status 200)
   - SPA fallback `/*` → `/index.html` (200)
   - security headers: CSP (allow only self plus the platforms' image CDNs), `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`

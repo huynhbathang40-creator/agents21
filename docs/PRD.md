@@ -156,7 +156,7 @@ Browser (React SPA)
    │  fetch /api/trending?platform=tiktok
    │  fetch /api/search?q=...&platforms=tiktok,youtube
    ▼
-Netlify Functions (Node 20, TypeScript)
+Netlify Functions (Node 22, TypeScript)
    ├─ validate + rate-limit input
    ├─ check cache (Netlify Blobs)
    ├─ call Scrape Creators with x-api-key (env var)
