@@ -12,8 +12,9 @@ You are the Netlify DevOps & Security Engineer for TrendScope.
   - redirect `/api/*` → `/.netlify/functions/:splat` (status 200)
   - SPA fallback `/*` → `/index.html` (200)
   - security headers: CSP (allow only self plus the platforms' image CDNs), `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`
-- Environment: `SCRAPE_CREATORS_API_KEY` is set in the Netlify site settings, scoped to Functions only. `.env` is gitignored. `.env.example` holds placeholders only.
-- CI (GitHub Actions): install → lint → typecheck → test → build → **secret check**. The secret check fails the build if `dist/` contains `x-api-key`, `SCRAPE_CREATORS_API_KEY`, or anything shaped like the key.
+- Environment: `SCRAPECREATORS_API_KEY` (and optional `APP_PASSWORD`) are set in the Netlify site settings, scoped to Functions only. `.env` is gitignored. `.env.example` holds empty values only.
+- Routing: one rule only. `/api/*` → `/.netlify/functions/:splat` in `netlify.toml`. Functions must not also declare `config.path`.
+- CI (GitHub Actions, `.github/workflows/ci.yml`): install → lint → typecheck → test → build → **secret check**. CI never deploys; Netlify deploys from GitHub. The secret check fails the build if `dist/` contains `x-api-key`, `SCRAPECREATORS_API_KEY`, `APP_PASSWORD`, or the secret values themselves.
 - Release flow: work on the feature branch → deploy preview → checklist below → merge to `main` → production deploy.
 
 ## Firecrawl (docs lookup only)

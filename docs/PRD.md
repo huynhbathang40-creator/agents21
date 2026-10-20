@@ -190,11 +190,17 @@ api.scrapecreators.com
 ### 9.4 Configuration
 | Env var | Where | Purpose |
 |---|---|---|
-| `SCRAPE_CREATORS_API_KEY` | Netlify site env (Functions scope) | Upstream auth. **Never committed or exposed to the client.** |
+| `SCRAPECREATORS_API_KEY` | Netlify site env (Functions scope) | Upstream auth. **Never committed or exposed to the client.** |
+| `APP_PASSWORD` | optional, Netlify site env | If set, visitors must enter it before the app calls the API (protects credits). Enforced from M3. |
 | `CACHE_TTL_TRENDING_SEC` | optional | Overrides the default of 900 |
 | `CACHE_TTL_SEARCH_SEC` | optional | Overrides the default of 600 |
 
-`.env` goes in `.gitignore`. A `.env.example` holds placeholder values only.
+`.env` goes in `.gitignore`. A `.env.example` holds empty values only.
+
+### 9.5 Runtime and deployment
+- **Node 22.** Node 20 is past end-of-life, and the build tooling targets 22. Set in `netlify.toml`, `package.json` `engines`, and CI.
+- **GitHub → Netlify.** All code is pushed to GitHub only. Netlify is connected to the repo and builds and deploys from it: `main` goes live, pull requests get preview links. GitHub Actions CI only runs quality checks and never deploys.
+- **One routing rule.** `/api/*` → `/.netlify/functions/:splat` in `netlify.toml`. Functions don't declare their own `config.path`, so there's no overlap that could cause 404s.
 
 ## 10. Non-functional requirements
 
@@ -220,14 +226,18 @@ api.scrapecreators.com
 
 | Milestone | Scope | Exit criteria |
 |---|---|---|
-| **M0 — Scaffold** | Vite + React + TS, Tailwind, Netlify config, lint/test setup, `.env.example` | `npm run build` passes and a Netlify preview deploys |
-| **M1 — Trending** | `/api/trending` for 3 platforms, normalizers, card grid, tabs | Trending shows real data on the preview deploy |
-| **M2 — Search** | `/api/search`, hashtag/keyword routing, merging, partial-failure handling, URL state | US-3 through US-7 and US-9 pass manual QA |
-| **M3 — Hardening** | Caching, rate limit, error mapping, a11y pass, Playwright smoke | Lighthouse ≥ 90 for perf and a11y. No key in the client bundle (grep check in CI). |
-| **M4 — Launch** | Merge to `main`, production deploy, README | Production URL live and the smoke test passes against it |
-| **M5 — P1/P2** | Details panel, rising topics, extra platforms | Each feature is behind its own PR |
+| Milestone | Scope | Exit criteria |
+|---|---|---|
+| **M1 — Foundation** | React + TS + Tailwind app with a placeholder page that shows whether the backend is running and the API key is set. `netlify.toml` (build, `/api/*` routing, security headers). `/api/health` server stub. Shared video data model. Lint, type checks, tests, GitHub CI workflow. `.env.example` with empty values. README with Netlify setup. | All checks pass in CI. Test proves `/api/health` never leaks the key. `/api/health` returns `ok` on the first Netlify deploy or preview. |
+| **M2 — Platform connectors** | Scrape Creators client plus TikTok, Instagram and YouTube connectors that read trending/search data and convert it to the shared `Video` model. Fixtures from the docs. | Each connector passes its fixture tests, including missing fields and garbage input. |
+| **M3 — API endpoints** | `/api/trending` and `/api/search` with input validation, partial-failure handling, caching (Netlify Blobs), per-IP rate limit, error mapping, and the optional `APP_PASSWORD` gate. | Handler tests pass with mocked upstream (success, 400, 402→503, 429, timeout, cache hit). |
+| **M4 — Trending UI** | Platform tabs, region and sort controls, video cards, loading/empty/error states, URL state. Narrow CSP `img-src` to the platforms' image CDNs. | US-1, US-2, US-5, US-6, US-7 pass on a preview deploy with real data. |
+| **M5 — Search UI and polish** | Search bar (keyword vs `#hashtag`), platform filters, merged results, "Load more", accessibility pass, responsive layout. | US-3, US-4, US-9 pass. axe finds no serious issues. |
+| **M6 — QA and launch** | Playwright smoke tests, Lighthouse, final security review, **merge to `main`**, production deploy. | Production URL live, smoke test passes against it, Lighthouse ≥ 90 for perf and a11y. |
 
-**Branching:** work happens on `claude/dreamy-hypatia-1332u7` (or feature branches off it). It's merged to `main` once milestone exit criteria pass, and Netlify deploys production from `main`.
+P1/P2 features (details panel, rising topics, extra platforms) come after M6, each in its own PR.
+
+**Branching:** all work happens on `claude/dreamy-hypatia-1332u7` and is merged to `main` at **M6**. Netlify deploys production from `main`, with preview links for pull requests.
 
 ## 13. Success metrics
 - Under 1% of `/api/*` requests return 5xx, measured over 7 days.
@@ -245,6 +255,7 @@ api.scrapecreators.com
 | Thumbnail URLs expire or block hotlinking | Broken images | Placeholder fallback on `onError`. Image proxy function considered for P1. |
 | API key leaks | Third parties spend the credits | Server-only env var, CI grep for the key pattern in `dist/`, and the key is rotated if exposed |
 | Dev container can't reach `api.scrapecreators.com` directly (egress blocked during setup) | Can't test live from the build session | Develop against recorded fixtures and verify live on Netlify deploy previews |
+| `/api/*` routing can't be exercised outside Netlify | A routing mistake only shows up after deploy | One routing rule only, and open `/api/health` on the first deploy or preview |
 
 ## 15. Open questions
 1. Final product name and branding?

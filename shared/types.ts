@@ -22,6 +22,14 @@ export interface PlatformError {
   message: string;
 }
 
+/** GET /api/health. Booleans only; never secret values. */
+export interface HealthResponse {
+  status: "ok";
+  apiKeyConfigured: boolean;
+  passwordProtected: boolean;
+  time: string;
+}
+
 export interface SearchResponse {
   results: Video[];
   errors: PlatformError[];

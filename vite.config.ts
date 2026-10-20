@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
@@ -6,4 +6,4 @@ export default defineConfig({
   test: {
     include: ["src/**/*.test.ts", "netlify/functions/**/*.test.ts", "shared/**/*.test.ts"],
   },
-} as Parameters<typeof defineConfig>[0]);
+});
