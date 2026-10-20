@@ -21,6 +21,14 @@ You only ever push to GitHub. Netlify watches this repo and builds and deploys e
 
 After your first deploy, open `/api/health` on the site. It should return `"status": "ok"` and `"apiKeyConfigured": true`.
 
+### Troubleshooting: "Setup needed" banner / "Service temporarily unavailable"
+
+This means the functions can't see `SCRAPECREATORS_API_KEY`.
+
+1. Check the variable exists under **Site configuration → Environment variables**, spelled exactly `SCRAPECREATORS_API_KEY`, with the **Functions** scope included.
+2. Environment variables only apply to **new** deploys. After adding or changing one, go to **Deploys → Trigger deploy → Deploy project** (or push a commit to `main`).
+3. If `/api/health` shows `"apiKeyConfigured": true` but videos still don't load, the key value itself is wrong or out of credits. Check it at [app.scrapecreators.com](https://app.scrapecreators.com/).
+
 ## Local development
 
 Requires Node 22.
