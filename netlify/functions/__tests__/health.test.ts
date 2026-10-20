@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { HealthResponse } from "../../shared/types";
-import handler from "./health";
+import type { HealthResponse } from "../../../shared/types";
+import handler from "../health";
 
 const FAKE_KEY = "test-key-should-never-leak-123";
 const FAKE_PASSWORD = "test-password-should-never-leak";
