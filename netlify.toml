@@ -26,4 +26,4 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     # img-src: only the platforms' image CDNs (hosts seen in Scrape Creators responses).
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://*.tiktokcdn.com https://*.tiktokcdn-us.com https://*.cdninstagram.com https://*.fbcdn.net https://i.ytimg.com https://*.ytimg.com https://yt3.ggpht.com https://*.ggpht.com https://img.youtube.com https://yt3.googleusercontent.com; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://*.tiktokcdn.com https://*.tiktokcdn-us.com https://*.cdninstagram.com https://*.fbcdn.net https://i.ytimg.com https://*.ytimg.com https://yt3.ggpht.com https://*.ggpht.com https://img.youtube.com https://yt3.googleusercontent.com; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'"
