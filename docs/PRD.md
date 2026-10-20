@@ -233,11 +233,11 @@ api.scrapecreators.com
 | **M3 — API endpoints** | `/api/trending` and `/api/search` with input validation, partial-failure handling, caching (Netlify Blobs), per-IP rate limit, error mapping, and the optional `APP_PASSWORD` gate. | Handler tests pass with mocked upstream (success, 400, 402→503, 429, timeout, cache hit). |
 | **M4 — Trending UI** | Platform tabs, region and sort controls, video cards, loading/empty/error states, URL state. Narrow CSP `img-src` to the platforms' image CDNs. | US-1, US-2, US-5, US-6, US-7 pass on a preview deploy with real data. |
 | **M5 — Search UI and polish** | Search bar (keyword vs `#hashtag`), platform filters, merged results, "Load more", accessibility pass, responsive layout. | US-3, US-4, US-9 pass. axe finds no serious issues. |
-| **M6 — QA and launch** | Playwright smoke tests, Lighthouse, final security review, **merge to `main`**, production deploy. | Production URL live, smoke test passes against it, Lighthouse ≥ 90 for perf and a11y. |
+| **M6 — QA and launch** | Playwright smoke tests, Lighthouse, final security review, launch sign-off on production. | Production URL live, smoke test passes against it, Lighthouse ≥ 90 for perf and a11y. |
 
 P1/P2 features (details panel, rising topics, extra platforms) come after M6, each in its own PR.
 
-**Branching:** all work happens on `claude/dreamy-hypatia-1332u7` and is merged to `main` at **M6**. Netlify deploys production from `main`, with preview links for pull requests.
+**Branching:** work happens on `claude/dreamy-hypatia-1332u7`, and **every milestone is pushed to `main`** once its checks pass (owner decision, replacing the earlier "merge at M6" plan). Netlify deploys production from `main`, with preview links for pull requests. M6 is the final QA and launch sign-off.
 
 ## 13. Success metrics
 - Under 1% of `/api/*` requests return 5xx, measured over 7 days.
