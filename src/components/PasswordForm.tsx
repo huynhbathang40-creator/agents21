@@ -48,7 +48,7 @@ export function PasswordForm({ incorrect, onSubmitted, submitting = false }: Pro
         This app is password protected
       </h2>
       <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
-        Enter the password you were given to see trending videos. It is kept only for this browser tab.
+        Enter the password you were given to use TrendScope. It is kept only for this browser tab.
       </p>
       <form onSubmit={onSubmit} className="mt-4 space-y-3" noValidate>
         <div>

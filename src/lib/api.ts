@@ -1,6 +1,7 @@
 // Client for our own /api routes only. Never talks to the upstream provider directly.
 import type { HealthResponse, Platform, SearchResponse } from "../../shared/types";
 import { clearPassword, getPassword } from "./password";
+import { isAllPlatforms, orderPlatforms } from "./search";
 
 export const PASSWORD_HEADER = "x-app-password";
 
@@ -124,6 +125,30 @@ export async function fetchTrending(
   const params = new URLSearchParams({ platform });
   if (region) params.set("region", region);
   return normalizeResponse(await apiGet(`/api/trending?${params.toString()}`, signal));
+}
+
+/**
+ * GET /api/search. `platforms` is omitted when all are requested (server default);
+ * `cursor.<platform>` is sent for each requested platform that has a cursor.
+ */
+export function searchUrl(q: string, platforms: readonly Platform[], cursors: Partial<Record<Platform, string>> = {}): string {
+  const params = new URLSearchParams({ q });
+  const list = orderPlatforms(platforms);
+  if (list.length && !isAllPlatforms(list)) params.set("platforms", list.join(","));
+  for (const p of list) {
+    const cursor = cursors[p];
+    if (cursor) params.set(`cursor.${p}`, cursor);
+  }
+  return `/api/search?${params.toString()}`;
+}
+
+export async function searchVideos(
+  q: string,
+  platforms: readonly Platform[],
+  cursors: Partial<Record<Platform, string>> = {},
+  signal?: AbortSignal,
+): Promise<SearchResponse> {
+  return normalizeResponse(await apiGet(searchUrl(q, platforms, cursors), signal));
 }
 
 export async function fetchHealth(signal?: AbortSignal): Promise<HealthResponse> {

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Native controls follow the app theme (set via the `dark` class on <html>). */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
+}
+:root.dark {
+  color-scheme: dark;
 }

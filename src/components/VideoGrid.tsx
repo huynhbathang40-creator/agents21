@@ -20,7 +20,8 @@ export function VideoGrid({ videos }: { videos: Video[] }) {
 
 export function VideoGridSkeleton({ count = 10 }: { count?: number }) {
   return (
-    <div role="status" aria-live="polite">
+    // Loading is announced by the view's LiveRegion; this only marks the placeholder for AT.
+    <div>
       <span className="sr-only">Loading videos…</span>
       <div className={GRID}>
         {Array.from({ length: count }, (_, i) => (

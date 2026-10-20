@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 import { FOCUS_RING } from "./focus";
 
 interface Props {
-  /** M5: the search bar (keyword / #hashtag + platform filters) renders here. */
+  /** The search bar (keyword / #hashtag + platform filters). */
   searchSlot?: ReactNode;
 }
 
@@ -12,12 +13,14 @@ export function Header({ searchSlot }: Props) {
       <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center gap-x-6 gap-y-3 px-4 py-3 sm:px-6">
         <a
           href="/"
-          className={`rounded-md text-xl font-bold tracking-tight text-neutral-900 dark:text-white ${FOCUS_RING}`}
+          className={`order-1 rounded-md text-xl font-bold tracking-tight text-neutral-900 dark:text-white ${FOCUS_RING}`}
         >
           Trend<span className="text-indigo-700 dark:text-indigo-300">Scope</span>
         </a>
-        {/* Search slot (M5). */}
-        <div className="min-w-0 flex-1" data-slot="search">
+        <div className="order-2 ml-auto md:order-3 md:ml-0">
+          <ThemeToggle />
+        </div>
+        <div className="order-3 w-full min-w-0 md:order-2 md:w-auto md:flex-1" data-slot="search">
           {searchSlot}
         </div>
       </div>

@@ -9,6 +9,8 @@ import {
   fetchHealth,
   fetchTrending,
   parseRetryAfter,
+  searchUrl,
+  searchVideos,
   shouldRetry,
 } from "./api";
 import { clearPassword, getPassword, setPassword } from "./password";
@@ -178,5 +180,65 @@ describe("shouldRetry", () => {
   it("retries other errors once", () => {
     expect(shouldRetry(0, new ApiError("down", 502))).toBe(true);
     expect(shouldRetry(1, new ApiError("down", 502))).toBe(false);
+  });
+});
+
+describe("searchVideos", () => {
+  function sentParams(): URLSearchParams {
+    const url = lastRequest().url;
+    expect(url.startsWith("/api/search?")).toBe(true);
+    return new URL(url, "http://localhost").searchParams;
+  }
+
+  it("omits platforms when all are requested and encodes the hashtag", async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse(200, okBody));
+    await searchVideos("#fitness", ["youtube", "tiktok", "instagram"]);
+    expect(lastRequest().url).toBe("/api/search?q=%23fitness");
+  });
+
+  it("sends a canonical platforms csv for a subset", async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse(200, okBody));
+    await searchVideos("cat videos", ["youtube", "tiktok"]);
+    const params = sentParams();
+    expect(params.get("q")).toBe("cat videos");
+    expect(params.get("platforms")).toBe("tiktok,youtube");
+    expect([...params.keys()].some((k) => k.startsWith("cursor."))).toBe(false);
+  });
+
+  it("adds cursor.<platform> only for requested platforms with a cursor", async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse(200, okBody));
+    await searchVideos("dogs", ["instagram", "youtube"], { instagram: "ig-2", youtube: "yt=2&x", tiktok: "tt-2" });
+    const params = sentParams();
+    expect(params.get("platforms")).toBe("instagram,youtube");
+    expect(params.get("cursor.instagram")).toBe("ig-2");
+    expect(params.get("cursor.youtube")).toBe("yt=2&x");
+    expect(params.has("cursor.tiktok")).toBe(false);
+  });
+
+  it("sends cursors with platforms omitted when all three page", () => {
+    const url = searchUrl("x", ["tiktok", "instagram", "youtube"], { tiktok: "a", instagram: "b", youtube: "c" });
+    expect(url).toBe("/api/search?q=x&cursor.tiktok=a&cursor.instagram=b&cursor.youtube=c");
+  });
+
+  it("sends the password header and maps 401/429 like trending", async () => {
+    setPassword("pw");
+    fetchMock.mockResolvedValueOnce(jsonResponse(200, okBody));
+    await searchVideos("x", ["tiktok"]);
+    expect(lastRequest().headers[PASSWORD_HEADER]).toBe("pw");
+
+    clearPassword();
+    fetchMock.mockResolvedValueOnce(jsonResponse(401, { error: "Password required" }));
+    expect(await searchVideos("x", ["tiktok"]).catch((e: unknown) => e)).toBeInstanceOf(PasswordRequiredError);
+
+    fetchMock.mockResolvedValueOnce(jsonResponse(429, {}, { "Retry-After": "5" }));
+    const err = await searchVideos("x", ["tiktok"]).catch((e: unknown) => e);
+    expect(err).toBeInstanceOf(RateLimitedError);
+    expect((err as RateLimitedError).retryAfterSec).toBe(5);
+  });
+
+  it("normalizes a partial response", async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse(200, { results: [], cursors: { tiktok: "n" } }));
+    const res = await searchVideos("x", ["tiktok"]);
+    expect(res).toEqual({ results: [], errors: [], cursors: { tiktok: "n" }, cached: false });
   });
 });

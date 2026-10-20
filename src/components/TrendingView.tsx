@@ -1,11 +1,13 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTrending, PasswordRequiredError } from "../lib/api";
 import { PLATFORM_LABELS, regionApplies } from "../lib/platforms";
+import { documentTitle } from "../lib/search";
 import { sortVideos } from "../lib/sort";
-import { useViewState } from "../hooks/useViewState";
+import type { ViewState } from "../lib/viewState";
 import { EmptyState } from "./EmptyState";
 import { ErrorState } from "./ErrorState";
+import { LiveRegion } from "./LiveRegion";
 import { PasswordForm } from "./PasswordForm";
 import { PlatformNotice } from "./PlatformNotice";
 import { PlatformTabs, tabId } from "./PlatformTabs";
@@ -17,8 +19,15 @@ import { FOCUS_RING } from "./focus";
 const MAX_CARDS = 30; // FR-2
 const PANEL_ID = "trending-panel";
 
-export function TrendingView() {
-  const [{ platform, region, sort }, update] = useViewState();
+interface Props {
+  state: ViewState;
+  onChange: (patch: Partial<ViewState>) => void;
+  /** Runs a search for a suggested hashtag from the empty state. */
+  onSearch: (q: string) => void;
+}
+
+export function TrendingView({ state, onChange: update, onSearch }: Props) {
+  const { platform, region, sort } = state;
   // Region only affects TikTok; other platforms share one cache entry regardless of the selector.
   const effectiveRegion = regionApplies(platform) ? region : undefined;
 
@@ -34,6 +43,15 @@ export function TrendingView() {
   const platformErrors = query.data?.errors ?? [];
   const refreshing = query.isFetching && !query.isPending;
   const retry = () => void query.refetch();
+  const label = PLATFORM_LABELS[platform];
+
+  useEffect(() => {
+    document.title = documentTitle(`Trending on ${label}`);
+  }, [label]);
+
+  let announcement = "";
+  if (query.isPending) announcement = `Loading trending videos on ${label}…`;
+  else if (query.isSuccess) announcement = `${videos.length} trending ${videos.length === 1 ? "video" : "videos"} on ${label}`;
 
   let content;
   if (query.isPending) {
@@ -45,7 +63,7 @@ export function TrendingView() {
   } else if (videos.length === 0 && platformErrors.length > 0) {
     content = <ErrorState message={platformErrors[0].message} onRetry={retry} retrying={query.isFetching} />;
   } else if (videos.length === 0) {
-    content = <EmptyState />;
+    content = <EmptyState onSelectHashtag={onSearch} />;
   } else {
     content = (
       <div className="space-y-4">
@@ -58,8 +76,9 @@ export function TrendingView() {
   return (
     <section aria-labelledby="trending-heading" className="space-y-4">
       <h1 id="trending-heading" className="text-2xl font-bold text-neutral-900 dark:text-white">
-        Trending on {PLATFORM_LABELS[platform]}
+        Trending on {label}
       </h1>
+      <LiveRegion message={announcement} />
       <PlatformTabs value={platform} onChange={(p) => update({ platform: p })} panelId={PANEL_ID} />
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <RegionSelect
